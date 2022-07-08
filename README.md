@@ -1,9 +1,10 @@
 # Minicademic
 My personal website for virtual learning management of students, subjects and scores. Powered with Django.
 
-This is made to be run in [PythonAnywhere](https://www.pythonanywhere.com/)
+This is made to be run in [PythonAnywhere](https://www.pythonanywhere.com/).
 
 Stack:
-  - Django (Python)
+  - Python
+  - Django
   - MySQL
-  -
+  - Vue? Angular?
