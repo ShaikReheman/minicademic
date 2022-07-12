@@ -22,7 +22,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY') or 'Django-secret-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,11 +78,15 @@ WSGI_APPLICATION = 'minicademic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('DATABASE_ENGINE') or 'django.db.backends.sqlite3',
+        'NAME': os.getenv('DATABASE_NAME') or 'db.sqlite3',
+        'USER': os.getenv('DATABASE_USER') or '',
+        'PASSWORD': os.getenv('DATABASE_PASSWORD') or '',
+        'HOST': os.getenv('DATABASE_HOST') or '',
+        'PORT': os.getenv('DATABASE_PORT') or '',
     }
 }
-
+print(DATABASES['default'])
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
