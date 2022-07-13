@@ -2,16 +2,22 @@ import os
 import hmac
 import hashlib
 
-from django.http import HttpResponse, HttpResponseNotAllowed
+import git
+from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
+from django.views.decorators.csrf import csrf_exempt
 
+from . import settings
 
-def update_repository(request):
-    x_hub_signature = request.headers.get('X-Hub-Signature')
+@csrf_exempt
+def update_repository(request: HttpRequest):
+    if request.method == 'POST':
+        x_hub_signature = request.headers.get('X-Hub-Signature')
 
-    if is_valid_signature(x_hub_signature, request.data, os.getenv('WEBHOOK_TOKEN')):
-        return HttpResponse('Web server updated!')
-    else:
-        return HttpResponseNotAllowed('Sorry, but you are not allowed!')
+        if is_valid_signature(x_hub_signature, request.data, os.getenv('WEBHOOK_TOKEN')):
+            git.Repo(settings.BASE_DIR).remotes.origin.pull()
+            return HttpResponse('Web server updated!')
+        else:
+            return HttpResponseNotAllowed('Sorry, but you are not allowed!')
 
 
 def is_valid_signature(x_hub_signature, data, private_key):
