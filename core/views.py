@@ -8,4 +8,4 @@ from minicademic import settings
 # Create your views here.
 
 def home_view(request):
-    return HttpResponse("HELO ANGGELito")
+    return HttpResponse("HELO ANGGELito amigo")
