@@ -8,4 +8,4 @@ from minicademic import settings
 # Create your views here.
 
 def home_view(request):
-    return HttpResponse('Hello world! ' + str(time.time() - settings.start_time))
+    return HttpResponse("HELO ANGGEL")
