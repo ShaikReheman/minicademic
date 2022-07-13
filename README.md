@@ -8,3 +8,4 @@ Stack:
   - Django
   - MySQL
   - Bootstrap
+  - twojs
