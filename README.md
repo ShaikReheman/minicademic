@@ -7,4 +7,4 @@ Stack:
   - Python
   - Django
   - MySQL
-  - Bootstrap
+  - Bootstrap (?)
