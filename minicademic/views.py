@@ -16,8 +16,8 @@ def update_repository(request: HttpRequest):
         #if is_valid_signature(x_hub_signature, request.data, os.getenv('WEBHOOK_TOKEN')):
         git.Repo(settings.BASE_DIR).remotes.origin.pull()
         return HttpResponse('Web server updated!')
-        #else:
-        #    return HttpResponse('Sorry, but you are not allowed!')
+    else:
+        return HttpResponse('Sorry, but you are not allowed!')
 
 
 def is_valid_signature(x_hub_signature, data, private_key):
