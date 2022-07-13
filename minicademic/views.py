@@ -3,7 +3,7 @@ import hmac
 import hashlib
 
 import git
-from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
+from django.http import HttpRequest, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from . import settings
@@ -11,7 +11,7 @@ from . import settings
 @csrf_exempt
 def update_repository(request: HttpRequest):
     if request.method == 'POST':
-        x_hub_signature = request.headers.get('X-Hub-Signature')
+        x_hub_signature = request.headers.get('X-Hub-Signature-256')
 
         if is_valid_signature(x_hub_signature, request.body, os.getenv('WEBHOOK_TOKEN')):
             git.Repo(settings.BASE_DIR).remotes.origin.pull()
